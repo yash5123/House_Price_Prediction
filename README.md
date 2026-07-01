@@ -164,7 +164,7 @@ These plots are generated automatically when you run the training script. They l
 
 <div align="center">
 
-### Made with ❤️ by Yash
+### Made by Yash
 
 ![GitHub](https://img.shields.io/badge/GitHub-yash5123-181717?style=for-the-badge&logo=github)
 
