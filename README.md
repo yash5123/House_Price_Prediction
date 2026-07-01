@@ -6,9 +6,6 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Now-success?style=for-the-badge)](https://house-price-prediction-vhgo.onrender.com)
-[![GitHub Repo](https://img.shields.io/badge/Repository-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/yash5123/House_Price_Prediction)
-
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
@@ -25,6 +22,9 @@
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
 ## 🎯 About
+
+> [!IMPORTANT]
+> **Model Training Notebook**: The exact pipeline used to train this Linear Regression model is available in the [Jupyter Notebook (train_model.ipynb)](notebook/train_model.ipynb). This notebook contains the raw training and evaluation code with no comments or annotations.
 
 This is a full-stack house price estimator that takes in five simple neighborhood characteristics and returns a predicted home value, powered by a Linear Regression model trained on 5,000 real US housing records. No sign-ups, no API keys, no nonsense.
 
