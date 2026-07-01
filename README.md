@@ -1,9 +1,6 @@
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=House%20Price%20Estimator&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Know%20what%20a%20home%20is%20worth%20before%20you%20even%20visit&descSize=16&descAlignY=55"/>
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&pause=1000&color=B87333&center=true&vCenter=true&width=600&lines=Trained+on+5%2C000+real+US+housing+records;Predicts+prices+in+under+200ms;91.8%25+accuracy+with+Linear+Regression;Clean+responsive+UI+with+no+frameworks;Built+with+FastAPI+%2B+scikit-learn)](https://git.io/typing-svg)
-
 <br/>
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
