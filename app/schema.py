@@ -1,24 +1,7 @@
-"""
-Pydantic Schemas: Request and response models for the House Price Prediction API.
-
-These schemas match the exact features used by the trained model:
-- Area Income
-- Area House Age
-- Area No of Rooms
-- Area No of Bedrooms
-- Area Population
-"""
-
 from pydantic import BaseModel, Field
 
 
 class HouseFeatures(BaseModel):
-    """Input features for house price prediction.
-
-    All fields correspond to the USA Housing dataset columns.
-    Constraints enforce sane ranges to catch bad input early.
-    """
-
     area_income: float = Field(
         ...,
         ge=0,
@@ -71,8 +54,6 @@ class HouseFeatures(BaseModel):
 
 
 class PredictionResponse(BaseModel):
-    """Response payload for a successful prediction."""
-
     predicted_price: float = Field(
         ...,
         description="Predicted house price in USD"
@@ -88,15 +69,11 @@ class PredictionResponse(BaseModel):
 
 
 class HealthResponse(BaseModel):
-    """Response payload for the health check endpoint."""
-
     status: str = Field(default="healthy")
     model_loaded: bool = Field(default=True)
     model_type: str = Field(default="LinearRegression")
 
 
 class ErrorResponse(BaseModel):
-    """Standardized error response."""
-
-    error: str
-    detail: str
+    error: str = Field(..., description="Error type or message")
+    detail: str = Field(..., description="Detailed error description")

@@ -1,12 +1,3 @@
-"""
-House Price Prediction API: FastAPI Application
-
-Endpoints:
-    GET  /health   : Liveness check
-    POST /predict  : Predict house price from features
-    GET  /docs     : Auto-generated Swagger UI (enabled by default)
-"""
-
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,10 +10,9 @@ from app.schema import HouseFeatures, PredictionResponse, HealthResponse, ErrorR
 from app.model_loader import get_model, get_scaler, get_feature_names, load_all
 
 
-# Lifespan: load model once at startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load ML artifacts at startup, release on shutdown."""
+    # Load ML artifacts at startup
     info = load_all()
     print(f"Model loaded: {info['model']} | Scaler: {info['scaler']}")
     print(f"   Features: {info['features']}")
@@ -30,13 +20,10 @@ async def lifespan(app: FastAPI):
     print("Shutting down...")
 
 
-# ─── App ────────────────────────────────────────────────────
+# App initialization
 app = FastAPI(
     title="House Price Prediction API",
-    description=(
-        "Predict US house prices based on area characteristics. "
-        "Built with scikit-learn Linear Regression and served via FastAPI."
-    ),
+    description="Predict US house prices based on area characteristics.",
     version="1.0.0",
     lifespan=lifespan,
     responses={
@@ -45,7 +32,7 @@ app = FastAPI(
     },
 )
 
-# ─── CORS ───────────────────────────────────────────────────
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -54,16 +41,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ─── Serve frontend static files ────────────────────────────
+# Serve frontend static files
 frontend_dir = Path(__file__).resolve().parent.parent / "frontend"
 if frontend_dir.exists():
     app.mount("/frontend", StaticFiles(directory=str(frontend_dir), html=True), name="frontend")
 
 
-# ─── Global exception handler ──────────────────────────────
+# Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    """Catch unhandled exceptions and return clean JSON, never a raw stack trace."""
     return JSONResponse(
         status_code=500,
         content={
@@ -73,10 +59,9 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-# ─── Endpoints ──────────────────────────────────────────────
+# Endpoints
 @app.get("/", include_in_schema=False)
 async def root():
-    """Redirect root to frontend or docs."""
     from fastapi.responses import RedirectResponse
     if frontend_dir.exists():
         return RedirectResponse(url="/frontend/index.html")
@@ -87,7 +72,7 @@ async def root():
     "/health",
     response_model=HealthResponse,
     summary="Health Check",
-    description="Simple liveness check: confirms the API is running and the model is loaded.",
+    description="Simple health check endpoint.",
     tags=["System"],
 )
 async def health_check():
@@ -103,10 +88,7 @@ async def health_check():
     "/predict",
     response_model=PredictionResponse,
     summary="Predict House Price",
-    description=(
-        "Takes area characteristics and returns a predicted house price. "
-        "All features must be provided as numeric values within valid ranges."
-    ),
+    description="Predict house price based on area statistics.",
     tags=["Prediction"],
     responses={
         200: {
@@ -124,13 +106,11 @@ async def health_check():
     },
 )
 async def predict_price(features: HouseFeatures):
-    """Predict house price from area features."""
     try:
         model = get_model()
         scaler = get_scaler()
-        feature_names = get_feature_names()
-
-        # Build feature array in the exact order the model expects
+        
+        # Build feature array in expected order
         feature_values = np.array([[
             features.area_income,
             features.area_house_age,
@@ -139,16 +119,9 @@ async def predict_price(features: HouseFeatures):
             features.area_population,
         ]])
 
-        # Scale features using the saved scaler
         features_scaled = scaler.transform(feature_values)
-
-        # Predict
         prediction = model.predict(features_scaled)[0]
-
-        # Ensure non-negative price
         predicted_price = max(0, float(prediction))
-
-        # Rough confidence based on how typical the input values are
         confidence = _assess_confidence(features)
 
         return PredictionResponse(
@@ -165,14 +138,7 @@ async def predict_price(features: HouseFeatures):
 
 
 def _assess_confidence(features: HouseFeatures) -> str:
-    """
-    Provide a rough confidence indicator based on whether input values
-    fall within the typical ranges seen in training data.
-
-    This is NOT a statistical confidence interval: it's a heuristic
-    to flag when inputs are unusual.
-    """
-    # Approximate training data ranges (from EDA)
+    # Heuristics based on training data ranges
     typical_ranges = {
         "area_income": (17000, 110000),
         "area_house_age": (2.5, 10),
@@ -188,8 +154,8 @@ def _assess_confidence(features: HouseFeatures) -> str:
             out_of_range_count += 1
 
     if out_of_range_count == 0:
-        return "High: all inputs are within typical ranges"
+        return "High"
     elif out_of_range_count <= 2:
-        return "Moderate: some inputs are outside typical ranges"
+        return "Moderate"
     else:
-        return "Low: several inputs are far from typical values"
+        return "Low"

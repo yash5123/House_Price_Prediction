@@ -1,13 +1,4 @@
-/**
- * House Price Estimator: Frontend Logic
- * 
- * Handles:
- * - Form validation and submission
- * - API communication with /predict endpoint
- * - Loading, success, and error state management
- * - Animated price counter
- */
-
+// Frontend logic for House Price Estimator
 (() => {
     'use strict';
 
