@@ -109,10 +109,10 @@ Here is the full journey from opening the app to getting your estimate:
 | 🔍 Real Estate Curious | Compare different neighborhood profiles side by side to see what drives home prices |
 
 > [!IMPORTANT]
-> **For ML students**: This project does not skip steps. The training script includes full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data. Every decision is explained in the terminal output.
+> **For ML students**: This project does not skip steps. The training script and the [interactive Jupyter notebook](notebook/train_model.ipynb) include full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data. Every decision is explained in the terminal output.
 
 > [!TIP]
-> **For portfolio builders**: The project is structured exactly how a production ML app should be - separated model training, singleton loader, schema validation, and a frontend that talks to a real API. It is not a Jupyter notebook with a `predict()` call at the bottom.
+> **For portfolio builders**: The project is structured exactly how a production ML app should be - separated model training, singleton loader, schema validation, and a frontend that talks to a real API. You can explore the data pipeline and run the code block-by-block using the [Jupyter Notebook](notebook/train_model.ipynb).
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
