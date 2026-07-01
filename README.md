@@ -6,8 +6,8 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-success?style=for-the-badge)](https://house-price-prediction-vhgo.onrender.com)
-[![GitHub Repo](https://img.shields.io/badge/📦_Repository-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/yash5123/House_Price_Prediction)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Now-success?style=for-the-badge)](https://house-price-prediction-vhgo.onrender.com)
+[![GitHub Repo](https://img.shields.io/badge/Repository-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/yash5123/House_Price_Prediction)
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -41,19 +41,19 @@ The whole thing runs on a FastAPI backend that loads the model once at startup a
 
 Here is the full journey from opening the app to getting your estimate:
 
-1. 🖥️ **Open the app** — You land on a clean homepage with a hero section that immediately tells you what this does. No clutter, no popups.
+1. 🖥️ **Open the app** - You land on a clean homepage with a hero section that immediately tells you what this does. No clutter, no popups.
 
-2. ✏️ **Fill in five fields** — Average area income, house age, number of rooms, number of bedrooms, and area population. Each field has helper text so you know exactly what to enter.
+2. ✏️ **Fill in five fields** - Average area income, house age, number of rooms, number of bedrooms, and area population. Each field has helper text so you know exactly what to enter.
 
-3. 🔒 **Real-time validation kicks in** — Leave a field blank or type something out of range? The border turns red and a clear error message appears. The form will not submit until every field is valid.
+3. 🔒 **Real-time validation kicks in** - Leave a field blank or type something out of range? The border turns red and a clear error message appears. The form will not submit until every field is valid.
 
-4. 🖱️ **Hit "Estimate Price"** — The button disables, a copper spinner appears in the result card, and the text changes to "Computing the estimate..." while the API processes your request.
+4. 🖱️ **Hit "Estimate Price"** - The button disables, a copper spinner appears in the result card, and the text changes to "Computing the estimate..." while the API processes your request.
 
-5. ⚙️ **Behind the scenes** — Your inputs are sent to the FastAPI backend, scaled using the same StandardScaler that was fitted during training, and passed through the Linear Regression model. The server also checks whether your inputs fall within typical training data ranges to assess confidence.
+5. ⚙️ **Behind the scenes** - Your inputs are sent to the FastAPI backend, scaled using the same StandardScaler that was fitted during training, and passed through the Linear Regression model. The server also checks whether your inputs fall within typical training data ranges to assess confidence.
 
-6. 💰 **The price animates in** — An easing counter rolls up from $0 to the predicted value over 1.2 seconds. A confidence badge (High, Moderate, or Low) appears below it. A note explains what the estimate is based on.
+6. 💰 **The price animates in** - An easing counter rolls up from $0 to the predicted value over 1.2 seconds. A confidence badge (High, Moderate, or Low) appears below it. A note explains what the estimate is based on.
 
-7. 🔄 **Start over** — Click "New Estimate" to reset everything and try different numbers.
+7. 🔄 **Start over** - Click "New Estimate" to reset everything and try different numbers.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
@@ -61,39 +61,39 @@ Here is the full journey from opening the app to getting your estimate:
 
 ### 🏠 Core Prediction Engine
 
-- 🔥 **Instant Price Estimation** — Enter five neighborhood metrics, get a dollar-value home price prediction within milliseconds. The model was trained on 5,000 data points and achieves 91.8% accuracy.
+- 🔥 **Instant Price Estimation** - Enter five neighborhood metrics, get a dollar-value home price prediction within milliseconds. The model was trained on 5,000 data points and achieves 91.8% accuracy.
 
-- 📊 **Confidence Assessment** — Every prediction comes with a confidence tag. The system checks each of your inputs against the typical ranges from the training data and flags when values are unusual. You get "High", "Moderate", or "Low" so you know how much to trust the number.
+- 📊 **Confidence Assessment** - Every prediction comes with a confidence tag. The system checks each of your inputs against the typical ranges from the training data and flags when values are unusual. You get "High", "Moderate", or "Low" so you know how much to trust the number.
 
-- 🧮 **StandardScaler Preprocessing** — Your raw inputs are normalized using the exact same scaler that was fitted on training data. This prevents data leakage and ensures the model sees inputs in the format it was trained on.
+- 🧮 **StandardScaler Preprocessing** - Your raw inputs are normalized using the exact same scaler that was fitted on training data. This prevents data leakage and ensures the model sees inputs in the format it was trained on.
 
 > [!TIP]
 > The confidence system is not just a label. It actually loops through each feature, checks if it falls within the interquartile range of the training data, and counts how many fields are out of range. Zero out of range = High. One or two = Moderate. Three or more = Low.
 
 ### 🎨 UI & Experience
 
-- 🎯 **Animated Price Counter** — The predicted price does not just appear. It counts up from zero using an `easeOutCubic` timing function over 1.2 seconds. It respects the user's `prefers-reduced-motion` system setting.
+- 🎯 **Animated Price Counter** - The predicted price does not just appear. It counts up from zero using an `easeOutCubic` timing function over 1.2 seconds. It respects the user's `prefers-reduced-motion` system setting.
 
-- ✅ **Field-Level Validation** — Every input is validated individually. Error messages are contextual ("Average Area Income is required", "Must be between 0 and 500,000"). Errors clear automatically as you type.
+- ✅ **Field-Level Validation** - Every input is validated individually. Error messages are contextual ("Average Area Income is required", "Must be between 0 and 500,000"). Errors clear automatically as you type.
 
-- 🌿 **Custom Design System** — Forest Green (#1B4332), Warm Stone (#D4A574), and Copper (#B87333) with DM Serif Display for headings and Inter for body text. No CSS framework. Every pixel is intentional.
+- 🌿 **Custom Design System** - Forest Green (#1B4332), Warm Stone (#D4A574), and Copper (#B87333) with DM Serif Display for headings and Inter for body text. No CSS framework. Every pixel is intentional.
 
-- 📱 **Fully Responsive** — Works cleanly on desktop, tablet, and mobile. The two-column layout stacks to single-column on small screens, the sticky result card becomes static, and font sizes scale with `clamp()`.
+- 📱 **Fully Responsive** - Works cleanly on desktop, tablet, and mobile. The two-column layout stacks to single-column on small screens, the sticky result card becomes static, and font sizes scale with `clamp()`.
 
-- 📈 **SVG Regression Chart** — The "How it Works" section includes a hand-crafted SVG scatter plot with training data points and a regression trendline, visually explaining what the model is doing.
+- 📈 **SVG Regression Chart** - The "How it Works" section includes a hand-crafted SVG scatter plot with training data points and a regression trendline, visually explaining what the model is doing.
 
 ### ⚡ Backend & API
 
-- 🚀 **Singleton Model Loading** — The model, scaler, and feature names are loaded exactly once at server startup via FastAPI's lifespan context manager. Every subsequent request reads from memory. Zero redundant disk I/O.
+- 🚀 **Singleton Model Loading** - The model, scaler, and feature names are loaded exactly once at server startup via FastAPI's lifespan context manager. Every subsequent request reads from memory. Zero redundant disk I/O.
 
-- 🛡️ **Pydantic Schema Validation** — Every request is validated against strict Pydantic schemas with min/max constraints before it ever reaches the model. Bad input gets a clean 422 response with human-readable error messages.
+- 🛡️ **Pydantic Schema Validation** - Every request is validated against strict Pydantic schemas with min/max constraints before it ever reaches the model. Bad input gets a clean 422 response with human-readable error messages.
 
-- 🌐 **Global Error Handler** — Unhandled exceptions never leak raw stack traces to the client. A catch-all returns clean JSON with a generic message.
+- 🌐 **Global Error Handler** - Unhandled exceptions never leak raw stack traces to the client. A catch-all returns clean JSON with a generic message.
 
-- 📄 **Auto-Generated API Docs** — FastAPI provides Swagger UI at `/docs` out of the box. Every endpoint is documented with examples, descriptions, and response models.
+- 📄 **Auto-Generated API Docs** - FastAPI provides Swagger UI at `/docs` out of the box. Every endpoint is documented with examples, descriptions, and response models.
 
 > [!TIP]
-> The API is designed so the frontend can be served directly by FastAPI via `StaticFiles`, but also works standalone if opened as a local HTML file — it detects `file://` origins and falls back to `localhost:8000`.
+> The API is designed so the frontend can be served directly by FastAPI via `StaticFiles`, but also works standalone if opened as a local HTML file - it detects `file://` origins and falls back to `localhost:8000`.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
@@ -112,7 +112,7 @@ Here is the full journey from opening the app to getting your estimate:
 > **For ML students**: This project does not skip steps. The training script includes full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data. Every decision is explained in the terminal output.
 
 > [!TIP]
-> **For portfolio builders**: The project is structured exactly how a production ML app should be — separated model training, singleton loader, schema validation, and a frontend that talks to a real API. It is not a Jupyter notebook with a `predict()` call at the bottom.
+> **For portfolio builders**: The project is structured exactly how a production ML app should be - separated model training, singleton loader, schema validation, and a frontend that talks to a real API. It is not a Jupyter notebook with a `predict()` call at the bottom.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
@@ -120,13 +120,13 @@ Here is the full journey from opening the app to getting your estimate:
 
 | Technology | What it does in this project |
 |---|---|
-| ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) | The backbone — runs the training script, the API server, and all data processing |
+| ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) | The backbone - runs the training script, the API server, and all data processing |
 | ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white) | Trains the LinearRegression model and fits the StandardScaler on training data |
 | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white) | Serves the prediction API with automatic validation, docs, and CORS handling |
 | ![Uvicorn](https://img.shields.io/badge/Uvicorn-2D6A4F?style=for-the-badge) | ASGI server that runs FastAPI in production with async support |
 | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) | Loads, explores, and cleans the 5,000-row housing dataset |
 | ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white) | Handles feature arrays and numerical operations during prediction |
-| ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge) | Generates all EDA plots — heatmaps, scatter plots, histograms |
+| ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge) | Generates all EDA plots - heatmaps, scatter plots, histograms |
 | ![Seaborn](https://img.shields.io/badge/Seaborn-43AA8B?style=for-the-badge) | Adds statistical styling and the correlation heatmap visualization |
 | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) | Semantic page structure with accessible form inputs and ARIA labels |
 | ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) | Custom design system with CSS variables, responsive grid, and micro-animations |
@@ -145,7 +145,7 @@ These plots are generated automatically when you run the training script. They l
 ### Correlation Heatmap
 <img src="notebook/plots/correlation_heatmap.png" width="80%" />
 
-*<sub>Area Income dominates with a 0.640 correlation to Price. Bedrooms show a weak 0.171 — likely due to multicollinearity with total rooms.</sub>*
+*<sub>Area Income dominates with a 0.640 correlation to Price. Bedrooms show a weak 0.171 - likely due to multicollinearity with total rooms.</sub>*
 
 <br/>
 
@@ -162,25 +162,6 @@ These plots are generated automatically when you run the training script. They l
 *<sub>Near-perfect bell curve centered at $1.23M. The normal distribution validates the linear regression assumptions.</sub>*
 
 </div>
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
-
-## 🤓 Did You Know?
-
-> [!NOTE]
-> 💬 The animated price counter uses `requestAnimationFrame` with a cubic easing function — the same technique used in high-end UI libraries. It also gracefully degrades for users who have `prefers-reduced-motion` enabled.
-
-> [!NOTE]
-> 💬 The model loads in a **singleton pattern** — the `.pkl` files are read from disk exactly once when the server starts. Every prediction after that is pure in-memory computation. That is why responses come back in under 200ms.
-
-> [!NOTE]
-> 💬 The confidence assessment is not cosmetic. It programmatically checks each of your 5 inputs against the interquartile ranges of the original training dataset and counts how many fall outside typical bounds.
-
-> [!NOTE]
-> 💬 The entire frontend is **738 lines of CSS** with zero frameworks. Every color, shadow, and spacing value comes from CSS custom properties defined in a single `:root` block — making the whole design system swappable by changing ~15 variables.
-
-> [!NOTE]
-> 💬 The training script does not just train a model. It runs a full EDA pipeline: missing value checks, duplicate detection, IQR-based outlier analysis, correlation heatmaps, scatter plots with trendlines, distribution plots, coefficient interpretation on unscaled data, and a multicollinearity check between rooms and bedrooms.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
