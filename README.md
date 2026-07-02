@@ -49,25 +49,6 @@ The whole thing runs on a FastAPI backend that loads the model once at startup a
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
-## 🔄 How It Works
-
-Here is the full journey from opening the app to getting your estimate:
-
-1. 🖥️ **Open the app** - You land on a clean homepage with a hero section that immediately tells you what this does. No clutter, no popups.
-
-2. ✏️ **Fill in five fields** - Average area income, house age, number of rooms, number of bedrooms, and area population. Each field has helper text so you know exactly what to enter.
-
-3. 🔒 **Real-time validation kicks in** - Leave a field blank or type something out of range? The border turns red and a clear error message appears. The form will not submit until every field is valid.
-
-4. 🖱️ **Hit "Estimate Price"** - The button disables, a copper spinner appears in the result card, and the text changes to "Computing the estimate..." while the API processes your request.
-
-5. ⚙️ **Behind the scenes** - Your inputs are sent to the FastAPI backend, scaled using the same StandardScaler that was fitted during training, and passed through the Linear Regression model. The server also checks whether your inputs fall within typical training data ranges to assess confidence.
-
-6. 💰 **The price animates in** - An easing counter rolls up from $0 to the predicted value over 1.2 seconds. A confidence badge (High, Moderate, or Low) appears below it. A note explains what the estimate is based on.
-
-7. 🔄 **Start over** - Click "New Estimate" to reset everything and try different numbers.
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
 ## ✨ Features
 
@@ -109,24 +90,6 @@ Here is the full journey from opening the app to getting your estimate:
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
-## 💡 Who Can Use This?
-
-| 👤 Who | 🎯 What they do with it |
-|--------|------------------------|
-| 🎓 ML Students | Study a complete end-to-end regression pipeline: data → EDA → training → API → frontend |
-| 🏡 Curious Homeowners | Plug in their neighborhood stats and see what the model thinks their area is worth |
-| 📚 Data Science Learners | See how StandardScaler, train/test splits, and coefficient interpretation work in practice |
-| 👨‍🏫 Teachers & Professors | Use it as a classroom demo for supervised learning and web deployment |
-| 💼 Portfolio Builders | Fork it, swap the dataset, retrain, and have a polished full-stack ML project in minutes |
-| 🔍 Real Estate Curious | Compare different neighborhood profiles side by side to see what drives home prices |
-
-> [!IMPORTANT]
-> **For ML students**: This project does not skip steps. The [interactive Jupyter notebook](notebook/train_model.ipynb) includes full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data.
-
-> [!TIP]
-> **For portfolio builders**: The project is structured exactly how a production ML app should be - separated model training, singleton loader, schema validation, and a frontend that talks to a real API. You can explore the data pipeline and run the code block-by-block using the [Jupyter Notebook](notebook/train_model.ipynb).
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
 ## 🛠️ Built With
 
