@@ -34,6 +34,21 @@ The whole thing runs on a FastAPI backend that loads the model once at startup a
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
+## 🌐 Live Demo
+
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-1B4332?style=for-the-badge)](https://house-price-prediction-vhgo.onrender.com/)
+
+*Try it yourself - enter a few numbers and watch the estimate roll in.*
+
+</div>
+
+> [!NOTE]
+> This app is hosted on Render's free tier, which spins down after periods of inactivity. If it's been idle for a while, the first request may take 30-50 seconds to wake the server up - every request after that is instant.
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
+
 ## 🔄 How It Works
 
 Here is the full journey from opening the app to getting your estimate:
@@ -65,7 +80,7 @@ Here is the full journey from opening the app to getting your estimate:
 - 🧮 **StandardScaler Preprocessing** - Your raw inputs are normalized using the exact same scaler that was fitted on training data. This prevents data leakage and ensures the model sees inputs in the format it was trained on.
 
 > [!TIP]
-> The confidence system is not just a label. It actually loops through each feature, checks if it falls within the interquartile range of the training data, and counts how many fields are out of range. Zero out of range = High. One or two = Moderate. Three or more = Low.
+> The confidence system is not just a label. It actually loops through each feature, checks if it falls within the typical ranges of the training data, and counts how many fields are out of range. Zero out of range = High. One or two = Moderate. Three or more = Low.
 
 ### 🎨 UI & Experience
 
@@ -106,7 +121,7 @@ Here is the full journey from opening the app to getting your estimate:
 | 🔍 Real Estate Curious | Compare different neighborhood profiles side by side to see what drives home prices |
 
 > [!IMPORTANT]
-> **For ML students**: This project does not skip steps. The training script and the [interactive Jupyter notebook](notebook/train_model.ipynb) include full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data. Every decision is explained in the terminal output.
+> **For ML students**: This project does not skip steps. The [interactive Jupyter notebook](notebook/train_model.ipynb) includes full EDA with correlation heatmaps, scatter plots with trendlines, price distribution analysis, outlier detection via IQR, multicollinearity checks, and coefficient interpretation on unscaled data.
 
 > [!TIP]
 > **For portfolio builders**: The project is structured exactly how a production ML app should be - separated model training, singleton loader, schema validation, and a frontend that talks to a real API. You can explore the data pipeline and run the code block-by-block using the [Jupyter Notebook](notebook/train_model.ipynb).
@@ -159,6 +174,147 @@ These plots are generated automatically when you run the training script. They l
 *<sub>Near-perfect bell curve centered at $1.23M. The normal distribution validates the linear regression assumptions.</sub>*
 
 </div>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
+
+## ⚙️ Technical Details
+
+### 📁 Project Structure
+
+```
+House_Price_Prediction/
+├── data/
+│   └── housing.csv                # 5,000-row USA Housing dataset
+├── notebook/
+│   ├── train_model.ipynb          # EDA, cleaning, training, evaluation
+│   └── plots/                     # Saved EDA figures used in this README
+│       ├── correlation_heatmap.png
+│       ├── scatterplots.png
+│       └── price_distribution.png
+├── model/
+│   ├── house_price_model.pkl      # Trained LinearRegression model
+│   ├── scaler.pkl                 # Fitted StandardScaler
+│   ├── feature_names.pkl          # Ordered feature list used at inference
+│   └── metrics.pkl                # Saved RMSE / R² from evaluation
+├── app/
+│   ├── main.py                    # FastAPI app, routes, CORS, lifespan
+│   ├── model_loader.py            # Singleton loader for model + scaler
+│   ├── schema.py                  # Pydantic request/response models
+│   └── __init__.py
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── favicon.svg
+├── requirements.txt
+└── README.md
+```
+
+### 🧠 Model Details
+
+| | |
+|---|---|
+| **Dataset** | USA Housing dataset (Kaggle-style), 5,000 rows, no missing values |
+| **Features used** | Area Income, Area House Age, Area No of Rooms, Area No of Bedrooms, Area Population |
+| **Dropped column** | `Address` (free-text, no predictive value for a regression model) |
+| **Train/test split** | 80% / 20%, `random_state=42` for reproducibility |
+| **Model** | scikit-learn `LinearRegression` on `StandardScaler`-scaled features |
+| **RMSE (test set)** | ≈ $100,444 |
+| **R² (test set)** | 0.918 |
+
+**What the coefficients mean** (fit on unscaled data for direct interpretation, holding all other features constant):
+
+- **Area Income**: +$21.65 in predicted price for every +$1 in average area income. Small per-dollar effect, but income has the widest range of any feature, so it ends up driving the most variance overall - consistent with its 0.640 correlation with price.
+- **Area House Age**: +$164,666 for every additional year of average house age in the area. This looks counterintuitive at first (older houses are usually cheaper), but at the *area* level it more likely reflects that older, more established neighborhoods carry a location premium - this dataset predicts area-level averages, not individual property condition.
+- **Area No of Rooms**: +$119,624 per additional average room. The single strongest structural driver of price in this model.
+- **Area No of Bedrooms**: +$2,440 per additional average bedroom - a much smaller effect than rooms. This is expected: bedrooms are a subset of total rooms, so once "Rooms" is in the model, "Bedrooms" carries little extra information (the weak 0.171 correlation with price noted above is the same multicollinearity effect surfacing again).
+- **Area Population**: +$15.27 per additional resident. Small individual effect, real at scale given population values in the tens of thousands.
+
+> [!NOTE]
+> **Limitation**: Linear Regression assumes linear, additive relationships between features and price. It also can't natively express uncertainty - the "confidence" shown in the UI is a heuristic based on whether inputs fall within the training data's typical range, not a statistical confidence interval. A tree-based model (Random Forest, Gradient Boosting) would likely capture nonlinear effects and interactions the current model misses, at the cost of the direct, plain-English coefficient interpretation above.
+
+### 🔌 API Reference
+
+Full interactive docs are auto-generated at [`/docs`](https://house-price-prediction-vhgo.onrender.com/docs) (Swagger UI) - the reference below is the same information in plain text.
+
+**`GET /health`**
+
+```json
+{
+  "status": "healthy",
+  "model_loaded": true,
+  "model_type": "LinearRegression"
+}
+```
+
+**`POST /predict`**
+
+Request body:
+```json
+{
+  "area_income": 68583.11,
+  "area_house_age": 5.98,
+  "area_no_of_rooms": 6.99,
+  "area_no_of_bedrooms": 3.98,
+  "area_population": 36163.52
+}
+```
+
+Response:
+```json
+{
+  "predicted_price": 1232072.65,
+  "formatted_price": "$1,232,073",
+  "confidence": "High"
+}
+```
+
+All five fields are required and range-checked server-side (e.g. `area_income` must be between 0 and 500,000). Invalid input returns a `422` with a field-level error message instead of reaching the model.
+
+### 💻 Local Setup
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/yash5123/House_Price_Prediction.git
+cd House_Price_Prediction
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the API locally
+uvicorn app.main:app --reload
+```
+
+The app will be live at `http://127.0.0.1:8000` - the frontend is served automatically at `/frontend/index.html`, and the API docs at `/docs`.
+
+
+### 🚀 Deployment
+
+This project is deployed on **Render** as a single web service - FastAPI serves both the `/predict` and `/health` API routes *and* the static frontend (via `StaticFiles`), so there's only one service to deploy, not two.
+
+| Setting | Value |
+|---|---|
+| **Build command** | `pip install -r requirements.txt` |
+| **Start command** | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| **Runtime** | Python 3.11+ |
+| **Plan** | Free tier (spins down after inactivity - see the note in the Live Demo section above) |
+
+
+### 🧩 Environment & Versions
+
+| Package | Version |
+|---|---|
+| fastapi | 0.136.1 |
+| uvicorn | 0.46.0 |
+| scikit-learn | 1.8.0 |
+| pandas | 2.3.3 |
+| numpy | 2.4.2 |
+| joblib | 1.5.3 |
+| matplotlib | 3.10.7 |
+| seaborn | 0.13.2 |
+
+> [!TIP]
+> The scikit-learn version above must match between training and serving - a mismatch can cause `joblib.load()` to fail or silently change predictions if you retrain the model in a different environment.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" />
 
