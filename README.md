@@ -13,6 +13,8 @@
 
 *Enter a few neighborhood details. Get a home price estimate in seconds.*
 
+[![Live Demo](https://img.shields.io/badge/%E2%96%B2_LIVE_DEMO-00C7B7?style=for-the-badge&logoColor=white)](https://house-price-prediction-vhgo.onrender.com/)
+
 </div>
 
 ---
@@ -37,7 +39,7 @@ The whole thing runs on a FastAPI backend that loads the model once at startup a
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Now-1B4332?style=for-the-badge)](https://house-price-prediction-vhgo.onrender.com/)
+[![Live Demo](https://img.shields.io/badge/%E2%96%B2_LIVE_DEMO-00C7B7?style=for-the-badge&logoColor=white)](https://house-price-prediction-vhgo.onrender.com/)
 
 *Try it yourself - enter a few numbers and watch the estimate roll in.*
 
