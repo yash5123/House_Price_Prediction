@@ -7,8 +7,8 @@
     /* Color Palette */
     --bg-dark: #f4f1ea;
     --bg-dark-secondary: #ebe7dd;
-    --card-bg: rgba(255, 255, 255, 0.72);
-    --card-bg-hover: rgba(255, 255, 255, 0.85);
+    --card-bg: #ffffff;
+    --card-bg-hover: #ffffff;
     --border-glass: rgba(28, 25, 23, 0.08);
     --border-glass-active: rgba(67, 56, 202, 0.35);
     
@@ -80,7 +80,6 @@ body {
         radial-gradient(circle at 50% 50%, rgba(109, 40, 217, 0.02) 0%, transparent 50%),
         radial-gradient(rgba(28, 25, 23, 0.03) 1px, transparent 1px);
     background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
-    background-attachment: fixed;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -111,13 +110,11 @@ main {
 
 /* Header */
 .site-header {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(244, 241, 236, 0.92);
     border-bottom: 1px solid var(--border-glass);
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     transition: border-color var(--transition-base);
 }
 
@@ -140,7 +137,6 @@ main {
 
 .logo-icon {
     color: var(--accent-indigo);
-    filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.3));
 }
 
 .logo-text {
@@ -242,8 +238,6 @@ main {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-glass);
     overflow: hidden;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
@@ -710,8 +704,6 @@ input[type="number"]::placeholder {
     border-radius: var(--border-radius-lg);
     text-align: center;
     padding: 2.25rem 1.75rem;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     transition: border-color var(--transition-base), transform var(--transition-base);
 }
 
@@ -763,8 +755,6 @@ input[type="number"]::placeholder {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
 }
 
 .chart-title {
@@ -863,9 +853,9 @@ input[type="number"]::placeholder {
 
 /* Interactive & Accessibility Enhancements */
 .site-header.header-scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    border-bottom-color: rgba(79, 70, 229, 0.15);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    background: rgba(244, 241, 236, 0.98);
+    border-bottom-color: rgba(67, 56, 202, 0.15);
+    box-shadow: 0 4px 20px rgba(28, 25, 23, 0.03);
 }
 
 .chart-point {
@@ -882,7 +872,7 @@ input[type="number"]::placeholder {
 
 .chart-tooltip {
     position: absolute;
-    background: rgba(255, 255, 255, 0.98);
+    background: #ffffff;
     border: 1px solid var(--accent-indigo);
     border-radius: var(--border-radius-sm);
     padding: 8px 12px;
@@ -890,8 +880,7 @@ input[type="number"]::placeholder {
     font-weight: 600;
     color: var(--text-primary);
     pointer-events: none;
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.15);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(67, 56, 202, 0.15);
     z-index: 10;
     transition: opacity 150ms ease;
     text-align: left;
