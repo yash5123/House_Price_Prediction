@@ -264,4 +264,44 @@
         }
     });
 
+    // Header Scroll Dynamics
+    const header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+    }
+
+    // Interactive SVG Chart Tooltips
+    const points = document.querySelectorAll('.chart-point');
+    const tooltip = document.getElementById('chart-tooltip');
+    const chartContainer = document.querySelector('.chart-container');
+
+    if (points.length && tooltip && chartContainer) {
+        points.forEach(point => {
+            point.addEventListener('mouseenter', () => {
+                const income = point.getAttribute('data-income');
+                const price = point.getAttribute('data-price');
+                tooltip.innerHTML = `<strong>Income:</strong> ${income}<br><strong>Value:</strong> ${price}`;
+                tooltip.classList.remove('hidden');
+            });
+
+            point.addEventListener('mousemove', (e) => {
+                const rect = chartContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left + 15;
+                const y = e.clientY - rect.top - 55;
+                tooltip.style.left = `${x}px`;
+                tooltip.style.top = `${y}px`;
+            });
+
+            point.addEventListener('mouseleave', () => {
+                tooltip.classList.add('hidden');
+            });
+        });
+    }
+
 })();

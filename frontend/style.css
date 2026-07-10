@@ -863,3 +863,50 @@ input[type="number"]::placeholder {
         animation: none;
     }
 }
+
+/* Interactive & Accessibility Enhancements */
+.site-header.header-scrolled {
+    background: rgba(7, 9, 19, 0.9);
+    border-bottom-color: rgba(6, 182, 212, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.chart-point {
+    transition: r var(--transition-fast), fill var(--transition-fast), opacity var(--transition-fast);
+    cursor: pointer;
+}
+
+.chart-point:hover {
+    r: 7px;
+    fill: var(--accent-pink);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--accent-pink));
+}
+
+.chart-tooltip {
+    position: absolute;
+    background: rgba(13, 17, 30, 0.95);
+    border: 1px solid var(--accent-pink);
+    border-radius: var(--border-radius-sm);
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.25);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    transition: opacity 150ms ease;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* Keyboard Focus Visuals */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent-cyan) !important;
+    outline-offset: 3px;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5) !important;
+}
+

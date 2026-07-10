@@ -244,22 +244,22 @@
                         <line x1="50" y1="220" x2="480" y2="220" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5" />
                         
                         <!-- Scatter Points (Training Data) -->
-                        <circle cx="80" cy="190" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="110" cy="180" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="130" cy="155" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="140" cy="175" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="170" cy="140" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="190" cy="120" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="210" cy="145" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="230" cy="110" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="260" cy="95" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="280" cy="115" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="310" cy="80" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="340" cy="70" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="360" cy="90" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="390" cy="65" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="410" cy="45" r="4" fill="#06b6d4" opacity="0.6" />
-                        <circle cx="440" cy="50" r="4" fill="#06b6d4" opacity="0.6" />
+                        <circle cx="80" cy="190" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$37,000" data-price="$550,000" />
+                        <circle cx="110" cy="180" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$45,000" data-price="$600,000" />
+                        <circle cx="130" cy="155" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$50,000" data-price="$750,000" />
+                        <circle cx="140" cy="175" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$52,000" data-price="$650,000" />
+                        <circle cx="170" cy="140" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$60,000" data-price="$850,000" />
+                        <circle cx="190" cy="120" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$65,000" data-price="$980,000" />
+                        <circle cx="210" cy="145" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$70,000" data-price="$820,000" />
+                        <circle cx="230" cy="110" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$75,000" data-price="$1,050,000" />
+                        <circle cx="260" cy="95" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$82,000" data-price="$1,150,000" />
+                        <circle cx="280" cy="115" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$88,000" data-price="$1,020,000" />
+                        <circle cx="310" cy="80" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$95,000" data-price="$1,280,000" />
+                        <circle cx="340" cy="70" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$102,000" data-price="$1,350,000" />
+                        <circle cx="360" cy="90" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$108,000" data-price="$1,200,000" />
+                        <circle cx="390" cy="65" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$115,000" data-price="$1,400,000" />
+                        <circle cx="410" cy="45" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$120,000" data-price="$1,550,000" />
+                        <circle cx="440" cy="50" r="4" fill="#06b6d4" opacity="0.6" class="chart-point" data-income="$128,000" data-price="$1,500,000" />
                         
                         <!-- Regression Line (Prediction Trend) -->
                         <line x1="50" y1="210" x2="470" y2="40" stroke="#ec4899" stroke-width="3" stroke-linecap="round" />
@@ -272,6 +272,7 @@
                         <circle cx="75" cy="45" r="4" fill="#06b6d4" />
                         <text x="85" y="48" font-family="var(--font-body)" font-size="10" fill="#94a3b8">Historical regional sales</text>
                     </svg>
+                    <div id="chart-tooltip" class="chart-tooltip hidden"></div>
                 </div>
             </div>
         </section>
